@@ -10,6 +10,25 @@
     <link rel="stylesheet" href="assets/css/owl-carousel.css">
     <link rel="stylesheet" href="assets/css/lightbox.css">
     <!-- //Additional CSS Files -->
+
+    <style>
+        /* Adicione este código ao seu arquivo de estilo CSS */
+        .logo {
+            align-items: center;
+        }
+
+
+
+        .logo img {
+            max-height: 95px;
+            /* Ajuste a altura máxima conforme necessário */
+            max-width: 100%;
+            /* Garante que o logo não ultrapasse o contêiner */
+            margin-right: 10px;
+            /* Espaçamento entre o logo e o texto (se houver) */
+         
+        }
+    </style>
 </head>
 
 <body>
@@ -32,12 +51,16 @@
                 <div class="col-12">
                     <nav class="main-nav">
                         <!-- ***** Logo Start ***** -->
-                        <a href="gerenciamento.php" class="logo">
-                            <img src="assets/images/logo.png">
-                        </a>
+                        <div class="size">
+                            <a href="gerenciamento.php" class="logo">
+                                <img src="assets/images/logo20.png">
+                            </a>
+
+                        </div>
                         <!-- ***** Logo End ***** -->
                         <!-- ***** Menu Start ***** -->
                         <ul class="nav">
+
                             <li class="scroll-to-section"><a href="#top" class="active">Home</a></li>
                             <li class="submenu">
                                 <a href="javascript:;">Cadastro</a>
@@ -49,7 +72,8 @@
                                     <li><a href="cadastro_Regiao_Ponto.php">Cadastro de Região Ponto</a></li>
                                     <li><a href="cadastro_Veiculo.php">Cadastro de Veículo</a></li>
                                     <li><a href="cadastro_Vendedor.php">Cadastro de Vendedor</a></li>
-                                    <li><a href="cadatro_UtilizacaoVeiculo.php">Cadastro de Utilização de Veículo</a>
+                                    <li><a href="cadatro_UtilizacaoVeiculo.php">Cadastro de Utilização de
+                                            Veículo</a>
                                     </li>
                                 </ul>
                             </li>
@@ -71,6 +95,7 @@
                             <span>Menu</span>
                         </a>
                         <!-- ***** Menu End ***** -->
+
                     </nav>
                 </div>
             </div>
@@ -92,7 +117,7 @@
 
 
 
-   
+
 
 
 
@@ -100,7 +125,7 @@
 
     <!-- jQuery -->
     <script src="assets/js/jquery-2.1.0.min.js"></script>
-  
+
     <!-- Bootstrap -->
     <script src="assets/js/popper.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>

@@ -43,16 +43,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" href="assets/css/templatemo-hexashop.css">
     <link rel="stylesheet" href="assets/css/owl-carousel.css">
     <link rel="stylesheet" href="assets/css/lightbox.css">
+    
 </head>
 
 <body>
+    <!-- ***** Preloader Start ***** -->
+    <div id="preloader">
+        <div class="jumper">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    <!-- ***** Preloader End ***** -->
+
     <div class="subscribe">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="border p-4">
                     <div class="section-heading">
                         <h2>Login</h2>
-                        <span>Details to details are what make Hexashop different from the other themes.</span>
+                        <span>Por favor, efetue o login utilizando as credenciais corretas.</span>
                     </div>
                     <form id="subscribe" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
                         <?php if (isset($erroLogin)): ?>
@@ -77,14 +88,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 Entrar
                             </button>
                         </div>
-
-
-
                     </form>
-
-                    <div class="text-center mt-3">
-                        <p>"Área exclusiva para administradores"</p>
-                    </div>
                 </div>
             </div>
         </div>
@@ -128,7 +132,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 }, 500);
 
             });
-    });
+        });
 
     </script>
 </body>

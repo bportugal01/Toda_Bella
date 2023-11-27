@@ -1,10 +1,5 @@
-/*
 
-TemplateMo 571 Hexashop
 
-https://templatemo.com/tm-571-hexashop
-
-*/
 
 /* ---------------------------------------------
 Table of contents
@@ -145,6 +140,8 @@ body {
   }
 }
 
+
+
 .main-border-button a {
   font-size: 13px;
   color: #fff;
@@ -157,12 +154,12 @@ body {
 
 .main-border-button a:hover {
   background-color: #fff;
-  color: #2a2a2a;
+  color: #f25180;
 }
 
 .main-white-button a {
   font-size: 13px;
-  color: #2a2a2a;
+  color: #9d113b;
   background-color: #fff;
   padding: 12px 25px;
   display: inline-block;
@@ -189,7 +186,7 @@ body {
 .section-heading h2 {
   font-size: 34px;
   font-weight: 700;
-  color: #2a2a2a;
+  color: #9d113b;
 }
 
 .section-heading span {
@@ -220,15 +217,15 @@ header
 
 .background-header .logo,
 .background-header .main-nav .nav li a {
-  color: #1e1e1e!important;
+  color: #46081a!important;
 }
 
 .background-header .main-nav .nav li:hover a {
-  color: #2a2a2a!important;
+  color: #c62152!important;
 }
 
 .background-header .nav li a.active {
-  color: #2a2a2a!important;
+  color: #c62152!important;
 }
 
 .header-area {
@@ -300,7 +297,7 @@ header
   display: block;
   font-weight: 600;
   font-size: 15px;
-  color: #2a2a2a;
+  color: #c62152;
   text-transform: capitalize;
   -webkit-transition: all 0.3s ease 0s;
   -moz-transition: all 0.3s ease 0s;
@@ -313,7 +310,7 @@ header
 }
 
 .header-area .main-nav .nav li a {
-  color: #2a2a2a;
+  color: #c62152;
 }
 
 .header-area .main-nav .nav li:hover a,
@@ -336,14 +333,14 @@ header
   font-family: FontAwesome;
   content: "\f107";
   font-size: 12px;
-  color: #2a2a2a;
+  color: #c62152;
   position: absolute;
   right: 18px;
   top: 12px;
 }
 
 .background-header .main-nav .nav li.submenu:after {
-  color: #2a2a2a;
+  color: #c62152;
 }
 
 .header-area .main-nav .nav li.submenu ul {
@@ -369,7 +366,7 @@ header
   opacity: 1;
   display: block;
   background: #f7f7f7;
-  color: #2a2a2a!important;
+  color: #c62152!important;
   padding-left: 20px;
   height: 40px;
   line-height: 40px;
@@ -727,7 +724,7 @@ banner
   left: 15px;
   bottom: 15px;
   text-align: center;
-  background-color: rgba(42,42,42,.97);
+  background-color: rgb(221, 32, 86);
   opacity: 0;
   visibility: hidden;
   transition: all 0.5s;
@@ -786,7 +783,7 @@ Men
 
 #men .item .down-content h4 {
   font-size: 22px;
-  color: #2a2a2a;
+  color: #c62152;
   font-weight: 700;
   margin-bottom: 8px;
 }
@@ -947,7 +944,7 @@ Women
 
 #women .item .down-content h4 {
   font-size: 22px;
-  color: #2a2a2a;
+  color: #c62152;
   font-weight: 700;
   margin-bottom: 8px;
 }
@@ -1107,7 +1104,7 @@ Kids
 
 #kids .item .down-content h4 {
   font-size: 22px;
-  color: #2a2a2a;
+  color: #c62152;
   font-weight: 700;
   margin-bottom: 8px;
 }
@@ -1262,7 +1259,7 @@ Explore
 #explore .left-content h2 {
   font-size: 34px;
   font-weight: 700;
-  color: #2a2a2a;
+  color: #9d113b;
 }
 
 #explore .left-content span {
@@ -1299,13 +1296,13 @@ Explore
 }
 
 #explore .left-content .main-border-button a {
-  color: #2a2a2a;
-  border-color: #2a2a2a;
+  color: #f25180;
+  border-color: #f25180;
   margin-top: 35px;
 }
 
 #explore .left-content .main-border-button a:hover {
-  background-color: #2a2a2a;
+  background-color: #f25180;
   color: #fff;
 }
 
@@ -1334,7 +1331,7 @@ Explore
 #explore .types h4 {
   font-size: 24px;
   font-weight: 700;
-  color: #2a2a2a;
+  color: #c62152;
   padding-top: 90px;
   margin-bottom: 5px;
 }
@@ -1381,7 +1378,7 @@ Social
   right: 0;
   top: 0;
   width: 100%;
-  background-color: rgba(0,0,0,0.85);
+  background-color: rgba(212, 0, 78, 0.85);
   opacity: 0;
   visibility: hidden;
   transition: all .3s;
@@ -1440,29 +1437,34 @@ Subscribe
   font-size: 14px;
   font-style: italic;
   font-weight: 500;
-  color: #aaa;
-  border-radius: 0px;
+  color: #202020;
+  border-radius: 5px;
   border: 1px solid #7a7a7a;
   box-shadow: none;
 }
 
-.subscribe form input::focus {
+.subscribe form input:focus {
   border-color: #2a2a2a;
-  border-radius: 0px;
+  border-radius: 4px;
 }
 
 .subscribe form button {
-  width: 44px;
-  height: 44px;
-  display: inline-block;
+  width: 250px;
+  height: 50px;
+  display: block; /* Alterado para 'block' para ocupar toda a largura */
+  margin: 0 auto; /* Centraliza horizontalmente */
   text-align: center;
-  line-height: 44px;
+  line-height: 50px; /* Ajuste para centralizar o texto */
   background-color: #2a2a2a;
   box-shadow: none;
-  border: 1px solid transparent;
+  border: none;
+  border-radius: 4px;
   color: #fff;
   transition: all 0.3s;
 }
+
+
+ 
 
 .subscribe form button:hover {
   background-color: #fff;
@@ -1478,7 +1480,7 @@ Subscribe
 .subscribe ul li {
   font-size: 16px;
   font-weight: 700;
-  color: #2a2a2a;
+  color: #9d113b;
 }
 
 .subscribe ul li span,
@@ -1489,7 +1491,7 @@ Subscribe
 }
 
 .subscribe ul li span a:hover {
-  color: #2a2a2a;
+  color: #9d113b;
 }
 
 
@@ -1502,7 +1504,7 @@ footer
 footer {
   margin-top: 60px;
   padding: 60px 0px 30px 0px;
-  background-color: #2a2a2a;
+  background-color: #9d113b;
 }
 
 footer .logo {
@@ -1625,7 +1627,7 @@ Products Page
 
 #products .item .down-content h4 {
   font-size: 22px;
-  color: #2a2a2a;
+  color: #c62152;
   font-weight: 700;
   margin-bottom: 8px;
 }
@@ -1743,7 +1745,7 @@ Single Product Page
 
 #product .right-content h4 {
   font-size: 22px;
-  color: #2a2a2a;
+  color: #c62152;
   font-weight: 700;
   margin-bottom: 0px;
 }
@@ -1842,13 +1844,13 @@ Single Product Page
 }
 
 .total .main-border-button a {
-  border-color: #2a2a2a;
-  color: #2a2a2a;
+  border-color: #9d113b;
+  color: #9d113b;
 }
 
 .total .main-border-button a:hover {
   color: #fff;
-  background-color: #2a2a2a;
+  background-color: #f25180;
 }
 
 .quantity {
@@ -1937,7 +1939,7 @@ About Us Page
 .about-us .right-content h4 {
   font-size: 34px;
   font-weight: 700;
-  color: #2a2a2a;
+  color: #c62152;
 }
 
 .about-us .right-content span {
@@ -2060,7 +2062,7 @@ About Us Page
   width: 44px;
   height: 44px;
   background-color: #fff;
-  color: #2a2a2a;
+  color: #f25180;
   display: inline-block;
   text-align: center;
   line-height: 44px;
@@ -2069,7 +2071,7 @@ About Us Page
 }
 
 .our-team .team-item .thumb .hover-effect .inner-content ul li a:hover {
-  background-color: #2a2a2a;
+  background-color: #f25180;
   color: #fff;
 }
 
@@ -2080,14 +2082,14 @@ About Us Page
 
 .our-team .team-item .down-content h4 {
   font-size: 24px;
-  color: #2a2a2a;
+  color: #f25180;
   font-weight: 700;
   margin-bottom: 5px;
 }
 
 .our-team .team-item .down-content span {
   font-size: 14px;
-  color: #a1a1a1;
+  color: #919191;
   font-weight: 500;
   display: block;
   font-style: italic;
@@ -2123,7 +2125,7 @@ About Us Page
 .our-services .service-item h4 {
   font-size: 24px;
   font-weight: 700;
-  color: #2a2a2a;
+  color: #c62152;
   margin-bottom: 20px;
 }
 
@@ -2301,7 +2303,7 @@ responsive
 
 #preloader {
   overflow: hidden;
-  background-color: #2a2a2a;
+  background-color: #c62152;
   left: 0;
   right: 0;
   top: 0;

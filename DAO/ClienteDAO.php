@@ -1,4 +1,3 @@
-
 <?php
 include_once 'conexao/conexao.php';
 
@@ -57,7 +56,22 @@ class ClienteDAO
             return false;
         }
     }
+
+    public static function pesquisarClientes($nomeCliente)
+    {
+        try {
+            $conexao = Conexao::getInstance();
+
+            $sql = "SELECT * FROM Cliente WHERE NomeCliente LIKE :nomeCliente";
+            $stmt = $conexao->prepare($sql);
+            $stmt->bindValue(':nomeCliente', '%' . $nomeCliente . '%');
+            $stmt->execute();
+
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo "Erro ao pesquisar clientes: " . $e->getMessage();
+            return [];
+        }
+    }
 }
 ?>
-
-
