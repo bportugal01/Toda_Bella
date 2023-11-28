@@ -34,7 +34,7 @@
 
 
         .logo img {
-            max-height: 95px;
+            max-height: 80px;
             /* Ajuste a altura máxima conforme necessário */
             max-width: 100%;
             /* Garante que o logo não ultrapasse o contêiner */
@@ -188,6 +188,17 @@
             </div>
         </div>
     </div>
+
+    <script>
+        // Define a função para limpar os campos
+        function limparCampos() {
+            document.getElementById('pontoNome').value = '';
+            document.getElementById('regiaoId').value = '';
+        }
+
+        // Chama a função para limpar os campos quando a página é carregada
+        window.onload = limparCampos;
+    </script>
     <!-- jQuery -->
     <script src="assets/js/jquery-2.1.0.min.js"></script>
 

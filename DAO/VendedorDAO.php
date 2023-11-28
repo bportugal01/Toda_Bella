@@ -62,17 +62,17 @@ class VendedorDAO
         try {
             $conexao = Conexao::getInstance();
 
-            $sql = "SELECT Produto.NomeProduto, ItemNotaFiscal.QuantidadeProduto, Vendedor.NomeVendedor
-            FROM Vendedor
-            JOIN NotaFiscal ON Vendedor.CodigoVendedor = NotaFiscal.CodigoVendedor
-            JOIN ItemNotaFiscal ON NotaFiscal.CodigoNotaFiscal = ItemNotaFiscal.CodigoNotaFiscal
-            JOIN Produto ON ItemNotaFiscal.CodigoProduto = Produto.CodigoProduto
-            WHERE Vendedor.NomeVendedor = :nomeVendedor
-            ORDER BY Produto.NomeProduto";
-
+            $sql = "SELECT Vendedor.NomeVendedor, Produto.NomeProduto, SUM(ItemNotaFiscal.QuantidadeProduto) as QuantidadeTotal
+                FROM Produto
+                JOIN ItemNotaFiscal ON Produto.CodigoProduto = ItemNotaFiscal.CodigoProduto
+                JOIN NotaFiscal ON ItemNotaFiscal.CodigoNotaFiscal = NotaFiscal.CodigoNotaFiscal
+                JOIN Vendedor ON NotaFiscal.CodigoVendedor = Vendedor.CodigoVendedor
+                WHERE Vendedor.NomeVendedor = :NomeVendedor
+                GROUP BY Vendedor.NomeVendedor, Produto.NomeProduto
+                ORDER BY Produto.NomeProduto";
 
             $stmt = $conexao->prepare($sql);
-            $stmt->bindParam(':nomeVendedor', $nomeVendedor);
+            $stmt->bindParam(':NomeVendedor', $nomeVendedor);
             $stmt->execute();
 
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -81,6 +81,11 @@ class VendedorDAO
             return [];
         }
     }
+
+
+
+
+
 
     public static function pesquisarVendedores($nomeVendedor)
     {

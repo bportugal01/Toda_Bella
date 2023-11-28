@@ -1,3 +1,28 @@
+<?php
+
+session_start(); // Inicia a sessão, se ainda não estiver iniciada
+
+// Gera um token CSRF e o armazena na sessão
+if (!isset($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
+
+include_once 'DAO/NotaFiscalDAO.php';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['csrf_token']) && $_POST['csrf_token'] === $_SESSION['csrf_token']) {
+    $codigoNotaFiscal = $_POST['codigoNotaFiscal'];
+    $numeroNotaFiscal = $_POST['numeroNotaFiscal'];
+    $codigoCliente = $_POST['codigoCliente'];
+    $codigoVendedor = $_POST['codigoVendedor'];
+    $dataEmissao = $_POST['dataEmissao'];
+
+    NotaFiscalDAO::cadastrarNotaFiscal($codigoNotaFiscal, $numeroNotaFiscal, $codigoCliente, $codigoVendedor, $dataEmissao);
+}
+// Limpa o token CSRF após o processamento do formulário
+unset($_SESSION['csrf_token']);
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -142,20 +167,7 @@
                                     <button type="submit">Cadastrar Nota Fiscal</button>
                         </form>
 
-                        <?php
-                        include_once 'DAO/NotaFiscalDAO.php';
 
-                        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                            $codigoNotaFiscal = $_POST['codigoNotaFiscal'];
-                            $numeroNotaFiscal = $_POST['numeroNotaFiscal'];
-                            $codigoCliente = $_POST['codigoCliente'];
-                            $codigoVendedor = $_POST['codigoVendedor'];
-                            $dataEmissao = $_POST['dataEmissao'];
-
-                            NotaFiscalDAO::cadastrarNotaFiscal($codigoNotaFiscal, $numeroNotaFiscal, $codigoCliente, $codigoVendedor, $dataEmissao);
-                        }
-
-                        ?>
                     </div>
                 </div>
             </div>
@@ -164,7 +176,19 @@
 
 
     <br>
+    <script>
+        // Define a função para limpar os campos
+        function limparCampos() {
+            document.getElementById('codigoNotaFiscal').value = '';
+            document.getElementById('numeroNotaFiscal').value = '';
+            document.getElementById('codigoCliente').value = '';
+            document.getElementById('codigoVendedor').value = '';
+            document.getElementById('dataEmissao').value = '';
+        }
 
+        // Chama a função para limpar os campos quando a página é carregada
+        window.onload = limparCampos;
+    </script>
 
     <!-- jQuery -->
     <script src="assets/js/jquery-2.1.0.min.js"></script>

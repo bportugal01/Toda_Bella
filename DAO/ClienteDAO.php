@@ -3,16 +3,16 @@ include_once 'conexao/conexao.php';
 
 class ClienteDAO
 {
-    public static function cadastrarCliente($codigoCliente, $nomeCliente, $rgCliente, $cpfCliente, $enderecoCliente)
+    public static function cadastrarCliente( $nomeCliente, $rgCliente, $cpfCliente, $enderecoCliente)
     {
         try {
             $conexao = Conexao::getInstance();
 
-            $sql = "INSERT INTO Cliente (CodigoCliente, NomeCliente, RGCliente, CPFCliente, EnderecoCliente)
-                    VALUES (:codigoCliente, :nomeCliente, :rgCliente, :cpfCliente, :enderecoCliente)";
+            $sql = "INSERT INTO Cliente (NomeCliente, RGCliente, CPFCliente, EnderecoCliente)
+                    VALUES ( :nomeCliente, :rgCliente, :cpfCliente, :enderecoCliente)";
 
             $stmt = $conexao->prepare($sql);
-            $stmt->bindParam(':codigoCliente', $codigoCliente);
+          
             $stmt->bindParam(':nomeCliente', $nomeCliente);
             $stmt->bindParam(':rgCliente', $rgCliente);
             $stmt->bindParam(':cpfCliente', $cpfCliente);
@@ -73,5 +73,7 @@ class ClienteDAO
             return [];
         }
     }
+
+   
 }
 ?>

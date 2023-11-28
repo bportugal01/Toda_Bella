@@ -1,3 +1,28 @@
+<?php
+session_start(); // Inicia a sessão, se ainda não estiver iniciada
+
+// Gera um token CSRF e o armazena na sessão
+if (!isset($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
+
+// Verifica se o formulário foi submetido e o token CSRF é válido
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['csrf_token']) && $_POST['csrf_token'] === $_SESSION['csrf_token']) {
+    // Processa o formulário
+    include_once 'DAO/ClienteDAO.php';
+
+    $nomeCliente = $_POST['nomeCliente'];
+    $rgCliente = $_POST['rgCliente'];
+    $cpfCliente = $_POST['cpfCliente'];
+    $enderecoCliente = $_POST['enderecoCliente'];
+
+    ClienteDAO::cadastrarCliente($nomeCliente, $rgCliente, $cpfCliente, $enderecoCliente);
+
+    // Limpa o token CSRF após o processamento do formulário
+    unset($_SESSION['csrf_token']);
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -40,8 +65,6 @@
             /* Espaçamento entre o logo e o texto (se houver) */
 
         }
-
-       
     </style>
 
 </head>
@@ -115,14 +138,8 @@
                     <div class="section-heading">
                         <h2>Cadastro de Cliente</h2>
                         <form action="" method="post">
-                            <div class="mb-3">
-                                <fieldset>
-                                    <label for="codigoCliente">Código do Cliente:</label>
-                                    <input type="text" id="codigoCliente" name="codigoCliente"
-                                        value="<?php echo isset($_POST['codigoCliente']) ? $_POST['codigoCliente'] : ''; ?>"
-                                        required>
-                                </fieldset>
-                            </div>
+                            <input type="hidden" name="csrf_token"
+                                value="<?php echo isset($_SESSION['csrf_token']) ? $_SESSION['csrf_token'] : ''; ?>">
 
                             <div class="mb-3">
                                 <fieldset>
@@ -156,7 +173,7 @@
                                     <label for="cep">CEP do Cliente:</label>
                                     <input type="text" id="cep" name="cep"
                                         value="<?php echo isset($_POST['cep']) ? $_POST['cep'] : ''; ?>" required
-                                        onblur="getAddressByCEP()" oninput="formatCEP()" maxlength="14">
+                                        onblur="getAddressByCEP()" oninput="formatCEP()" maxlength="8">
                                 </fieldset>
                             </div>
 
@@ -178,28 +195,31 @@
                             <button type="submit" class="btn-moderno" onclick="getAddressByCEP()">Cadastrar
                                 Cliente</button>
                         </form>
-                        <?php
-                        include_once 'DAO/ClienteDAO.php';
 
-                        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                            $codigoCliente = $_POST['codigoCliente'];
-                            $nomeCliente = $_POST['nomeCliente'];
-                            $rgCliente = $_POST['rgCliente'];
-                            $cpfCliente = $_POST['cpfCliente'];
-                            $enderecoCliente = $_POST['enderecoCliente'];
-
-                            ClienteDAO::cadastrarCliente($codigoCliente, $nomeCliente, $rgCliente, $cpfCliente, $enderecoCliente);
-                        }
-                        ?>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    
+
     <br>
 
     <script>
+
+
+        // Define a função para limpar os campos
+        function limparCampos() {
+            document.getElementById('nomeCliente').value = '';
+            document.getElementById('rgCliente').value = '';
+            document.getElementById('cpfCliente').value = '';
+            document.getElementById('cep').value = '';
+            document.getElementById('enderecoCliente').value = '';
+            document.getElementById('numeroCliente').value = '';
+        }
+
+        // Chama a função para limpar os campos quando a página é carregada
+        window.onload = limparCampos;
+
         function formatCEP() {
             var cepInput = document.getElementById('cep');
             cepInput.value = maskCEP(cepInput.value.replace(/\D/g, ''));

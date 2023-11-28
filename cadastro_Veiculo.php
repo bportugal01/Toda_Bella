@@ -1,3 +1,26 @@
+<?php
+session_start(); // Inicia a sessão, se ainda não estiver iniciada
+
+// Gera um token CSRF e o armazena na sessão
+if (!isset($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
+
+include_once 'DAO/VeiculoDAO.php';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['csrf_token']) && $_POST['csrf_token'] === $_SESSION['csrf_token']) {
+    $codigoVeiculo = $_POST['codigoVeiculo'];
+    $placaVeiculo = $_POST['placaVeiculo'];
+    $tipoVeiculo = $_POST['tipoVeiculo'];
+    $modeloVeiculo = $_POST['modeloVeiculo'];
+
+    VeiculoDAO::cadastrarVeiculo($codigoVeiculo, $placaVeiculo, $tipoVeiculo, $modeloVeiculo);
+    // Limpa o token CSRF após o processamento do formulário
+    unset($_SESSION['csrf_token']);
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -32,7 +55,7 @@
 
 
         .logo img {
-            max-height: 95px;
+            max-height: 80px;
             /* Ajuste a altura máxima conforme necessário */
             max-width: 100%;
             /* Garante que o logo não ultrapasse o contêiner */
@@ -112,6 +135,9 @@
                     <div class="section-heading">
                         <h2>Cadastro de Veiculo</h2>
                         <form action="" method="post">
+
+                            <input type="hidden" name="csrf_token"
+                                value="<?php echo isset($_SESSION['csrf_token']) ? $_SESSION['csrf_token'] : ''; ?>">
                             <div class="mb-3">
                                 <fieldset>
                                     <label for="codigoVeiculo">Código do Veiculo:</label>
@@ -140,24 +166,25 @@
                             <button type="submit">Cadastrar Veiculo</button>
                         </form>
 
-                        <?php
-                        include_once 'DAO/VeiculoDAO.php';
 
-                        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                            $codigoVeiculo = $_POST['codigoVeiculo'];
-                            $placaVeiculo = $_POST['placaVeiculo'];
-                            $tipoVeiculo = $_POST['tipoVeiculo'];
-                            $modeloVeiculo = $_POST['modeloVeiculo'];
-
-                            VeiculoDAO::cadastrarVeiculo($codigoVeiculo, $placaVeiculo, $tipoVeiculo, $modeloVeiculo);
-                        }
-
-                        ?>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <script>
+        // Define a função para limpar os campos
+        function limparCampos() {
+            document.getElementById('codigoVeiculo').value = '';
+            document.getElementById('placaVeiculo').value = '';
+            document.getElementById('tipoVeiculo').value = '';
+            document.getElementById('modeloVeiculo').value = '';
+        }
+
+        // Chama a função para limpar os campos quando a página é carregada
+        window.onload = limparCampos;
+    </script>
     <!-- jQuery -->
     <script src="assets/js/jquery-2.1.0.min.js"></script>
 

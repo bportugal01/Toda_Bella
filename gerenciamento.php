@@ -20,7 +20,7 @@
 
 
         .logo img {
-            max-height: 95px;
+            max-height: 80px;
             /* Ajuste a altura máxima conforme necessário */
             max-width: 100%;
             /* Garante que o logo não ultrapasse o contêiner */
@@ -100,9 +100,25 @@
                 </div>
             </div>
         </div>
+        
     </header>
 
-
+    <div class="main-banner d-flex align-items-center" id="top">
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="border p-4">
+                        <div class="section-heading text-center">
+                            <h2>Bem-vindo ao acesso a base de dados da empresa TodaBella</h2>
+                            <p>Selecione uma das opções acima para realizar o gerenciamento dos dados</p>
+                            
+                        </div>
+                      
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 

@@ -31,7 +31,7 @@
 
 
         .logo img {
-            max-height: 95px;
+            max-height: 80px;
             /* Ajuste a altura máxima conforme necessário */
             max-width: 100%;
             /* Garante que o logo não ultrapasse o contêiner */
@@ -134,7 +134,8 @@
                             <div class="mb-3">
                                 <fieldset>
                                     <label for="telefoneVendedor">Telefone do Vendedor:</label>
-                                    <input type="tel" id="telefoneVendedor" name="telefoneVendedor" oninput="formatCelular()" required>
+                                    <input type="tel" id="telefoneVendedor" name="telefoneVendedor"
+                                        oninput="formatCelular()" required>
                                 </fieldset>
                             </div>
                             <div class="mb-3">
@@ -167,6 +168,20 @@
         </div>
     </div>
     <br>
+
+    <script>
+        // Define a função para limpar os campos
+        function limparCampos() {
+            document.getElementById('nomeVendedor').value = '';
+            document.getElementById('rgVendedor').value = '';
+            document.getElementById('dataNascimento').value = '';
+            document.getElementById('telefoneVendedor').value = '';
+            document.getElementById('codigoRegiao').value = '';
+        }
+
+        // Chama a função para limpar os campos quando a página é carregada
+        window.onload = limparCampos;
+    </script>
     <!-- jQuery -->
     <script src="assets/js/jquery-2.1.0.min.js"></script>
 

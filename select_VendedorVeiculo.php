@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Vendedor</title>
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap"
         rel="stylesheet">
 
@@ -42,7 +42,7 @@
 
 
         .logo img {
-            max-height: 95px;
+            max-height: 80px;
             /* Ajuste a altura máxima conforme necessário */
             max-width: 100%;
             /* Garante que o logo não ultrapasse o contêiner */
