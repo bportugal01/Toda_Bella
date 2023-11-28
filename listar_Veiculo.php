@@ -31,8 +31,7 @@
 
 
 
-    <link rel="stylesheet" href="assets/css/table.css">
-
+    <link rel="stylesheet" href="assets/css/css.css">
     <style>
         /* Adicione este código ao seu arquivo de estilo CSS */
         .logo {
@@ -140,7 +139,7 @@
                                         <th>Placa do Veículo</th>
                                         <th>Tipo do Veículo</th>
                                         <th>Modelo do Veículo</th>
-                                        <th>Ações</th>
+                                     
                                     </tr>
                                 </thead>
                                 <?php foreach ($Veiculos as $Veiculo): ?>
@@ -158,9 +157,7 @@
                                             <?= $Veiculo['ModeloVeiculo']; ?>
                                         </td>
 
-                                        <td data-label="Ações">
-                                            <a href='excluirVeiculo.php?codigo=<?= $Veiculo['CodigoVeiculo'] ?>'>Excluir</a>
-                                        </td>
+                                       
                                     </tr>
                                 <?php endforeach; ?>
                             </table>
@@ -173,7 +170,6 @@
                                         <th>Código do Vendedor</th>
                                         <th>Data De Utilização</th>
 
-                                        <th>Ações</th>
                                     </tr>
                                 </thead>
                                 <?php foreach ($UtilizacaoVeiculos as $UtilizacaoVeiculo): ?>
@@ -187,10 +183,7 @@
                                         <td data-label="Data de Utilização">
                                             <?= $UtilizacaoVeiculo['DataUtilizacao']; ?>
                                         </td>
-                                        <td data-label="Ações">
-                                            <a
-                                                href='excluirUtilizacaoVeiculo.php?codigo=<?= $UtilizacaoVeiculo['CodigoUtilizacao'] ?>'>Excluir</a>
-                                        </td>
+                                      
                                     </tr>
                                 <?php endforeach; ?>
                             </table>
@@ -200,7 +193,7 @@
             </div>
         </div>
     </div>
-    </div>
+    
 
 
     <!-- jQuery -->

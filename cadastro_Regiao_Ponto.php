@@ -22,6 +22,8 @@
 
     <link rel="stylesheet" href="assets/css/lightbox.css">
 
+    <link rel="stylesheet" href="assets/css/table.css">
+
 
     <style>
         /* Adicione este código ao seu arquivo de estilo CSS */
@@ -38,7 +40,7 @@
             /* Garante que o logo não ultrapasse o contêiner */
             margin-right: 10px;
             /* Espaçamento entre o logo e o texto (se houver) */
-         
+
         }
     </style>
 </head>
@@ -53,7 +55,7 @@
         </div>
     </div>
     <!-- ***** Preloader End ***** -->
-    
+
     <header class="header-area header-sticky sticky-top">
         <div class="container">
             <div class="row">
@@ -112,17 +114,22 @@
                     <div class="section-heading">
                         <div class="form-container">
                             <h2>Cadastro de Ponto Estratégico</h2>
-                            <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-
-                                <label for="pontoNome">Nome do Ponto Estratégico:</label>
-                                <input type="text" id="pontoNome" name="pontoNome" required>
-
-                                <label for="regiaoId">Região:</label>
-                                <input type="text" id="regiaoId" name="regiaoId" required>
-
+                            <form action="" method="post">
+                                <div class="mb-3">
+                                    <fieldset>
+                                        <label for="pontoNome">Nome do Ponto Estratégico:</label>
+                                        <input type="text" id="pontoNome" name="pontoNome" required>
+                                    </fieldset>
+                                </div>
+                                <div class="mb-3">
+                                    <fieldset>
+                                        <label for="regiaoId">Região:</label>
+                                        <input type="text" id="regiaoId" name="regiaoId" required>
+                                    </fieldset>
+                                </div>
                                 <button type="submit" name="submitForm">Cadastrar Ponto Estratégico</button>
                             </form>
-
+                            <br>
                             <?php
                             include_once 'DAO/PontoEstratagicoDAO.php';
                             include_once 'DAO/RegiaoDAO.php';
@@ -152,11 +159,15 @@
 
                             <h2>Listagem de Regiões</h2>
                             <table>
-                                <tr>
-                                    <th>Código da Região</th>
-                                    <th>Nome da Região</th>
-                                    <th>Ações</th>
-                                </tr>
+                                <thead>
+                                    <tr>
+                                        <th>Código da Região</th>
+                                        <th>Nome da Região</th>
+                                        <th>Ações</th>
+
+                                    </tr>
+                                </thead>
+
                                 <?php foreach ($regioes as $regiao): ?>
                                     <tr>
                                         <td>

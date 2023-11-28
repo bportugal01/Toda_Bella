@@ -31,7 +31,7 @@
 
 
 
-    <link rel="stylesheet" href="assets/css/table.css">
+    <link rel="stylesheet" href="assets/css/css.css">
 
     <style>
         /* Adicione este código ao seu arquivo de estilo CSS */
@@ -139,7 +139,7 @@
                                             <th>Código do Cliente</th>
                                             <th>Código do Vendedor</th>
                                             <th>Data de Emissão</th>
-                                            <th>Ações</th>
+                          
                                         </tr>
                                     </thead>
                                     <?php foreach ($NotaFiscal as $notaFiscal): ?>
@@ -159,10 +159,7 @@
                                             <td data-label="Data de Emissão">
                                                 <?= $notaFiscal['DataEmissao']; ?>
                                             </td>
-                                            <td data-label="Ações">
-                                                <a
-                                                    href='excluirNotaFiscal.php?codigo=<?= $notaFiscal['CodigoNotaFiscal'] ?>'>Excluir</a>
-                                            </td>
+                                          
                                         </tr>
                                     <?php endforeach; ?>
                                 </table>

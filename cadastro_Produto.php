@@ -37,7 +37,7 @@
             /* Garante que o logo não ultrapasse o contêiner */
             margin-right: 10px;
             /* Espaçamento entre o logo e o texto (se houver) */
-         
+
         }
     </style>
 </head>
@@ -112,20 +112,36 @@
                     <div class="section-heading">
                         <h2>Cadastro de Produto</h2>
                         <form action="" method="post">
-                            <label for="codigoProduto">Código do Produto:</label>
-                            <input type="text" id="codigoProduto" name="codigoProduto" required>
-
-                            <label for="nomeProduto">Nome do Produto:</label>
-                            <input type="text" id="nomeProduto" name="nomeProduto" required>
-
-                            <label for="situacao">Situação:</label>
-                            <input type="text" id="situacao" name="situacao" required>
-
-                            <label for="precoUnitario">Preço Unitário:</label>
-                            <input type="number" id="precoUnitario" name="precoUnitario" required>
-
-                            <label for="quantidadeEstoque">Quantidade em Estoque:</label>
-                            <input type="number" id="quantidadeEstoque" name="quantidadeEstoque" required>
+                            <div class="mb-3">
+                                <fieldset>
+                                    <label for="codigoProduto">Código do Produto:</label>
+                                    <input type="text" id="codigoProduto" name="codigoProduto" required>
+                                </fieldset>
+                            </div>
+                            <div class="mb-3">
+                                <fieldset>
+                                    <label for="nomeProduto">Nome do Produto:</label>
+                                    <input type="text" id="nomeProduto" name="nomeProduto" required>
+                                </fieldset>
+                            </div>
+                            <div class="mb-3">
+                                <fieldset>
+                                    <label for="situacao">Situação:</label>
+                                    <input type="text" id="situacao" name="situacao" required>
+                                </fieldset>
+                            </div>
+                            <div class="mb-3">
+                                <fieldset>
+                                    <label for="precoUnitario">Preço Unitário:</label>
+                                    <input type="text" id="precoUnitario" name="precoUnitario" required>
+                                </fieldset>
+                            </div>
+                            <div class="mb-3">
+                                <fieldset>
+                                    <label for="quantidadeEstoque">Quantidade em Estoque:</label>
+                                    <input type="number" id="quantidadeEstoque" name="quantidadeEstoque" required>
+                                </fieldset>
+                            </div>
 
                             <button type="submit">Cadastrar Produto</button>
                         </form>
@@ -141,6 +157,8 @@
                             $quantidadeEstoque = $_POST['quantidadeEstoque'];
 
                             ProdutoDAO::cadastrarProduto($codigoProduto, $nomeProduto, $situacao, $precoUnitario, $quantidadeEstoque);
+                          
+
                         }
 
                         ?>

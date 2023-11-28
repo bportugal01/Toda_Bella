@@ -112,20 +112,34 @@
                     <div class="section-heading">
                         <h2>Cadastro de Item Nota Fiscal</h2>
                         <form action="" method="post">
-                            <label for="numeroItemNotaFiscal">Número do Item da Nota Fiscal:</label>
-                            <input type="text" id="numeroItemNotaFiscal" name="numeroItemNotaFiscal" required>
-
-                            <label for="codigoProduto">Código do Produto:</label>
-                            <input type="text" id="codigoProduto" name="codigoProduto" required>
-
-                            <label for="codigoNotaFiscal">Código da Nota Fiscal:</label>
-                            <input type="text" id="codigoNotaFiscal" name="codigoNotaFiscal" required>
-
-                            <label for="quantidadeProduto">Quantidade do Produto:</label>
-                            <input type="text" id="quantidadeProduto" name="quantidadeProduto" required>
+                            <div class="mb-3">
+                                <fieldset>
+                                    <label for="numeroItemNotaFiscal">Número do Item da Nota Fiscal:</label>
+                                    <input type="text" id="numeroItemNotaFiscal" name="numeroItemNotaFiscal" required>
+                                </fieldset>
+                            </div>
+                            <div class="mb-3">
+                                <fieldset>
+                                    <label for="codigoProduto">Código do Produto:</label>
+                                    <input type="text" id="codigoProduto" name="codigoProduto" required>
+                                </fieldset>
+                            </div>
+                            <div class="mb-3">
+                                <fieldset>
+                                    <label for="codigoNotaFiscal">Código da Nota Fiscal:</label>
+                                    <input type="text" id="codigoNotaFiscal" name="codigoNotaFiscal" required>
+                                </fieldset>
+                            </div>
+                            <div class="mb-3">
+                                <fieldset>
+                                    <label for="quantidadeProduto">Quantidade do Produto:</label>
+                                    <input type="text" id="quantidadeProduto" name="quantidadeProduto" required>
+                                </fieldset>
+                            </div>
 
                             <button type="submit">Cadastrar Item Nota Fiscal</button>
                         </form>
+                        
                         <?php
                         include_once 'DAO/ItemNotaFiscalDAO.php';
 
@@ -145,6 +159,8 @@
             </div>
         </div>
     </div>
+
+    <br>
 
     <!-- jQuery -->
     <script src="assets/js/jquery-2.1.0.min.js"></script>

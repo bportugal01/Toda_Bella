@@ -69,7 +69,7 @@ class VendedorDAO
             JOIN Produto ON ItemNotaFiscal.CodigoProduto = Produto.CodigoProduto
             WHERE Vendedor.NomeVendedor = :nomeVendedor
             ORDER BY Produto.NomeProduto";
-                  
+
 
             $stmt = $conexao->prepare($sql);
             $stmt->bindParam(':nomeVendedor', $nomeVendedor);
@@ -81,5 +81,23 @@ class VendedorDAO
             return [];
         }
     }
+
+    public static function pesquisarVendedores($nomeVendedor)
+    {
+        try {
+            $conexao = Conexao::getInstance();
+
+            $sql = "SELECT * FROM Vendedor WHERE NomeVendedor LIKE :nomeVendedor";
+            $stmt = $conexao->prepare($sql);
+            $stmt->bindValue(':nomeVendedor', '%' . $nomeVendedor . '%');
+            $stmt->execute();
+
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo "Erro ao pesquisar vendedores: " . $e->getMessage();
+            return [];
+        }
+    }
+
 }
 ?>

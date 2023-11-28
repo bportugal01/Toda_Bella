@@ -36,7 +36,7 @@
             /* Garante que o logo não ultrapasse o contêiner */
             margin-right: 10px;
             /* Espaçamento entre o logo e o texto (se houver) */
-         
+
         }
     </style>
 
@@ -112,15 +112,24 @@
                     <div class="section-heading">
                         <h2>Cadastro de Utilização de Veículo</h2>
                         <form action="" method="post">
-                            <label for="codigoVeiculo">Código do Veículo:</label>
-                            <input type="text" id="codigoVeiculo" name="codigoVeiculo" required>
-
-                            <label for="codigoVendedor">Código do Vendedor:</label>
-                            <input type="text" id="codigoVendedor" name="codigoVendedor" required>
-
-                            <label for="dataUtilizacao">Data de Utilização:</label>
-                            <input type="date" id="dataUtilizacao" name="dataUtilizacao" required>
-
+                            <div class="mb-3">
+                                <fieldset>
+                                    <label for="codigoVeiculo">Código do Veículo:</label>
+                                    <input type="text" id="codigoVeiculo" name="codigoVeiculo" required>
+                                </fieldset>
+                            </div>
+                            <div class="mb-3">
+                                <fieldset>
+                                    <label for="codigoVendedor">Código do Vendedor:</label>
+                                    <input type="text" id="codigoVendedor" name="codigoVendedor" required>
+                                </fieldset>
+                            </div>
+                            <div class="mb-3">
+                                <fieldset>
+                                    <label for="dataUtilizacao">Data de Utilização:</label>
+                                    <input type="date" id="dataUtilizacao" name="dataUtilizacao" required>
+                                </fieldset>
+                            </div>
                             <button type="submit">Cadastrar Utilização de Veículo</button>
                         </form>
 

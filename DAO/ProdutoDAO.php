@@ -44,18 +44,39 @@ class ProdutoDAO
     {
         try {
             $conexao = Conexao::getInstance();
+            $conexao->beginTransaction();
 
-            $sql = "DELETE FROM Produto WHERE CodigoProduto = :codigoProduto";
-            $stmt = $conexao->prepare($sql);
-            $stmt->bindParam(':codigoProduto', $codigoProduto);
-            $stmt->execute();
+            // Check for associated records in itemnotafiscal table
+            $checkSql = "SELECT COUNT(*) FROM itemnotafiscal WHERE CodigoProduto = :codigoProduto";
+            $checkStmt = $conexao->prepare($checkSql);
+            $checkStmt->bindParam(':codigoProduto', $codigoProduto);
+            $checkStmt->execute();
+            $rowCount = $checkStmt->fetchColumn();
 
+            if ($rowCount > 0) {
+                // There are associated records, handle them (delete or update) before deleting the product
+                $deleteSql = "DELETE FROM itemnotafiscal WHERE CodigoProduto = :codigoProduto";
+                $deleteStmt = $conexao->prepare($deleteSql);
+                $deleteStmt->bindParam(':codigoProduto', $codigoProduto);
+                $deleteStmt->execute();
+            }
+
+            // Now, delete the product
+            $deleteSql = "DELETE FROM Produto WHERE CodigoProduto = :codigoProduto";
+            $deleteStmt = $conexao->prepare($deleteSql);
+            $deleteStmt->bindParam(':codigoProduto', $codigoProduto);
+            $deleteStmt->execute();
+
+            $conexao->commit();
             return true;
         } catch (PDOException $e) {
-            echo "Erro ao excluir produto: " . $e->getMessage();
+            $conexao->rollBack();
+            echo "Error deleting product: " . $e->getMessage();
             return false;
         }
     }
+
+
 
     public static function listarProdutosNaoVendidos()
     {

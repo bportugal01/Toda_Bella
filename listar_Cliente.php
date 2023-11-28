@@ -31,7 +31,7 @@
 
 
 
-    <link rel="stylesheet" href="assets/css/table.css">
+    <link rel="stylesheet" href="assets/css/css.css">
 
     <style>
         /* Adicione este código ao seu arquivo de estilo CSS */
@@ -42,20 +42,20 @@
 
 
         .logo img {
-            max-height: 95px;
+            max-height: 80px;
             /* Ajuste a altura máxima conforme necessário */
             max-width: 100%;
             /* Garante que o logo não ultrapasse o contêiner */
             margin-right: 10px;
             /* Espaçamento entre o logo e o texto (se houver) */
-         
+
         }
     </style>
 
 </head>
 
 
-    <!-- Restante do seu código HTML -->
+<!-- Restante do seu código HTML -->
 
 <body>
     <!-- ***** Preloader Start ***** -->
@@ -124,19 +124,25 @@
             <div class="row justify-content-center">
                 <div class="border p-4">
                     <div class="section-heading">
-
                         <div id="wrapper">
                             <?php
-                            // Agora, após o possível cadastro, lista os pontos estratégicos
                             include_once 'DAO/ClienteDAO.php';
 
-                            // Verifica se foi feita uma pesquisa
-                            if (isset($_GET['search'])) {
-                                $search = $_GET['search'];
-                                $clientes = ClienteDAO::pesquisarClientes($search);
-                            } else {
-                                $clientes = ClienteDAO::listarClientes();
+                            try {
+                                // Verifica se foi feita uma pesquisa
+                                if (isset($_GET['search'])) {
+                                    $search = htmlspecialchars($_GET['search']); // Sanitiza o input
+                                    $clientes = ClienteDAO::pesquisarClientes($search);
+                                } else {
+                                    $clientes = ClienteDAO::listarClientes();
+                                }
+                            } catch (PDOException $e) {
+                                // Loga o erro em um ambiente de produção
+                                error_log("Erro no script: " . $e->getMessage());
+                                // Mensagem de erro genérica para o usuário
+                                $clientes = [];
                             }
+
                             ?>
 
                             <h2>Listagem de Clientes</h2>
@@ -145,13 +151,14 @@
                                 <table>
                                     <thead>
                                         <tr>
-                                            <td colspan="6">
-                                                <form action="" method="GET">
+                                            <th colspan="5">
+                                                <form action="" method="GET" style="display: flex;">
                                                     <input type="text" name="search"
-                                                        placeholder="Pesquisar nome do cliente">
-                                                    <button type="submit">Pesquisar</button>
+                                                        placeholder="Pesquisar nome do cliente"
+                                                        value="<?= isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>">&nbsp;&nbsp;&nbsp;
+                                                        <button type="submit" class="btn btn-primary" style="background-color: #f25180; text-align: center; font-weight: bold; line-height: 40px;">Pesquisar</button>
                                                 </form>
-                                            </td>
+                                            </th>
                                         </tr>
                                         <tr>
                                             <th>Código do Cliente</th>
@@ -159,35 +166,38 @@
                                             <th>RG do Cliente</th>
                                             <th>CPF do Cliente</th>
                                             <th>Endereço do Cliente</th>
-                                            <th>Ações</th>
                                         </tr>
                                     </thead>
+
                                     <tbody>
-                                        <?php foreach ($clientes as $cliente): ?>
+                                        <?php if (empty($clientes)): ?>
                                             <tr>
-                                                <td data-label="Código do Cliente">
-                                                    <?= $cliente['CodigoCliente']; ?>
-                                                </td>
-                                                <td data-label="Nome do Cliente">
-                                                    <?= $cliente['NomeCliente']; ?>
-                                                </td>
-                                                <td data-label="RG do Cliente">
-                                                    <?= $cliente['RGCliente']; ?>
-                                                </td>
-                                                <td data-label="CPF do Cliente">
-                                                    <?= $cliente['CPFCliente']; ?>
-                                                </td>
-                                                <td data-label="Endereço do Cliente">
-                                                    <?= $cliente['EnderecoCliente']; ?>
-                                                </td>
-                                                <td data-label="Ações">
-                                                    <a
-                                                        href='excluirCliente.php?codigo=<?= $cliente['CodigoCliente'] ?>'>Excluir</a>
-                                                </td>
+                                                <td colspan="5">Cliente não encontrado</td>
                                             </tr>
-                                        <?php endforeach; ?>
+                                        <?php else: ?>
+                                            <?php foreach ($clientes as $cliente): ?>
+                                                <tr>
+                                                    <td data-label="Código do Cliente">
+                                                        <?= $cliente['CodigoCliente']; ?>
+                                                    </td>
+                                                    <td data-label="Nome do Cliente">
+                                                        <?= $cliente['NomeCliente']; ?>
+                                                    </td>
+                                                    <td data-label="RG do Cliente">
+                                                        <?= $cliente['RGCliente']; ?>
+                                                    </td>
+                                                    <td data-label="CPF do Cliente">
+                                                        <?= $cliente['CPFCliente']; ?>
+                                                    </td>
+                                                    <td data-label="Endereço do Cliente">
+                                                        <?= $cliente['EnderecoCliente']; ?>
+                                                    </td>
+                                                </tr>
+                                            <?php endforeach; ?>
+                                        <?php endif; ?>
                                     </tbody>
                                 </table>
+
                             </div>
                         </div>
                     </div>
@@ -195,6 +205,7 @@
             </div>
         </div>
     </div>
+
 
 
     <!-- jQuery -->

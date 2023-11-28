@@ -31,8 +31,7 @@
 
 
 
-    <link rel="stylesheet" href="assets/css/table.css">
-
+    <link rel="stylesheet" href="assets/css/css.css">
     <style>
         /* Adicione este código ao seu arquivo de estilo CSS */
         .logo {
@@ -48,7 +47,7 @@
             /* Garante que o logo não ultrapasse o contêiner */
             margin-right: 10px;
             /* Espaçamento entre o logo e o texto (se houver) */
-         
+
         }
     </style>
 </head>
@@ -123,15 +122,40 @@
 
                         <div id="wrapper">
                             <?php
-                            // Agora, após o possível cadastro, lista os pontos estratégicos
                             include_once 'DAO/VendedorDAO.php';
-                            $vendedores = VendedorDAO::listarVendedores();
+
+                            try {
+                                // Verifica se foi feita uma pesquisa
+                                if (isset($_GET['search'])) {
+                                    $search = htmlspecialchars($_GET['search']); // Sanitiza o input
+                                    $vendedores = VendedorDAO::pesquisarVendedores($search);
+                                } else {
+                                    $vendedores = VendedorDAO::listarVendedores();
+                                }
+                            } catch (PDOException $e) {
+                                // Loga o erro em um ambiente de produção
+                                error_log("Erro no script: " . $e->getMessage());
+                                // Mensagem de erro genérica para o usuário
+                                $vendedores = [];
+                            }
                             ?>
+
 
                             <h2>Listagem de Vendedores</h2>
 
                             <table>
                                 <thead>
+                                    <tr>
+                                        <th colspan="6">
+                                            <form action="" method="GET" style="display: flex;">
+                                                <input type="text" name="search"
+                                                    placeholder="Pesquisar nome do vendedor"
+                                                    value="<?= isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>">&nbsp;&nbsp;&nbsp;
+                                                <button type="submit" class="btn btn-primary"
+                                                    style="background-color: #f25180; text-align: center; font-weight: bold; line-height: 40px;">Pesquisar</button>
+                                            </form>
+                                        </th>
+                                    </tr>
                                     <tr>
                                         <th>Código do Vendedor</th>
                                         <th>Código da Região</th>
@@ -139,9 +163,10 @@
                                         <th>RG do Vendedor</th>
                                         <th>Data de Nascimento</th>
                                         <th>Telefone do Vendedor</th>
-                                        <th>Ações</th>
+
                                     </tr>
                                 </thead>
+
                                 <?php foreach ($vendedores as $vendedor): ?>
                                     <tr>
                                         <td data-label="Código do Vendedor">
@@ -162,10 +187,7 @@
                                         <td data-label="Telefone do Vendedor">
                                             <?= $vendedor['TelefoneVendedor']; ?>
                                         </td>
-                                        <td data-label="Ações">
-                                            <a
-                                                href='excluirVendedor.php?codigo=<?= $vendedor['CodigoVendedor'] ?>'>Excluir</a>
-                                        </td>
+
                                     </tr>
                                 <?php endforeach; ?>
                             </table>
@@ -213,14 +235,9 @@
                     $("#portfolio").fadeTo(50, 1);
                 }, 500);
 
-            });
-        });
+            });     });
 
     </script>
-
-</body>
-
-</html>
 
 </body>
 

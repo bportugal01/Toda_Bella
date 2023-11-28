@@ -1,3 +1,27 @@
+<?php
+ob_start();
+include_once 'DAO/PontoEstratagicoDAO.php';
+include_once 'DAO/RegiaoDAO.php';
+
+$redirectUrlPonto = 'listar_PontoEstrategico.php';
+
+if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['deletePonto']) && isset($_POST['codigoPonto'])) {
+    $codigoPonto = $_POST['codigoPonto'];
+    $deletedPonto = PontoEstrategicoDAO::excluirPontoEstrategico($codigoPonto);
+
+    if ($deletedPonto) {
+        header("Location: $redirectUrlPonto");
+        exit();
+    } else {
+        $deleteErrorPonto = "Erro ao excluir o ponto estratégico.";
+    }
+}
+
+$pontosEstrategicos = PontoEstrategicoDAO::listarPontosEstrategicos();
+$regioes = RegiaoDAO::listarRegioes();
+ob_end_clean();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -31,8 +55,7 @@
 
 
 
-    <link rel="stylesheet" href="assets/css/table.css">
-
+    <link rel="stylesheet" href="assets/css/css.css">
     <style>
         /* Adicione este código ao seu arquivo de estilo CSS */
         .logo {
@@ -48,7 +71,7 @@
             /* Garante que o logo não ultrapasse o contêiner */
             margin-right: 10px;
             /* Espaçamento entre o logo e o texto (se houver) */
-         
+
         }
     </style>
 </head>
@@ -143,24 +166,25 @@
                                         <th>Ações</th>
                                     </tr>
                                 </thead>
-                                    <?php foreach ($pontosEstrategicos as $ponto): ?>
-                                        <tr>
-                                            <td data-label = "Código Ponto E.">
-                                                <?= $ponto['CodigoPonto']; ?>
-                                            </td>
-                                            <td data-label = "Código da Região">
-                                                <?= $ponto['CodigoRegiao']; ?>
-                                            </td>
-                                            <td data-label = "Nome do Ponto E.">
-                                                <?= $ponto['NomePonto']; ?>
-                                            </td>
+                                <?php foreach ($pontosEstrategicos as $ponto): ?>
+                                    <tr>
+                                        <td data-label="Código Ponto E.">
+                                            <?= $ponto['CodigoPonto']; ?>
+                                        </td>
+                                        <td data-label="Código da Região">
+                                            <?= $ponto['CodigoRegiao']; ?>
+                                        </td>
+                                        <td data-label="Nome do Ponto E.">
+                                            <?= $ponto['NomePonto']; ?>
+                                        </td>
 
-                                            <td data-label="Ações">
-                                                <a
-                                                    href='excluirPontoEstrategico.php?codigo=<?= $ponto['CodigoPonto'] ?>'>Excluir</a>
-                                            </td>
-                                        </tr>
-                                    <?php endforeach; ?>
+                                        <td data-label="Ações">
+                                        <!-- Link para acionar a exclusão por meio de JavaScript -->
+                                        <a href="#"class="btn btn-primary " style="background-color: #c62152"
+                                            onclick="excluirPonto(<?= $ponto['CodigoPonto']; ?>)">Excluir</a>
+                                    </td>
+                                    </tr>
+                                <?php endforeach; ?>
                                 </thead>
                             </table>
 
@@ -170,15 +194,15 @@
                                     <tr>
                                         <th>Código da Região</th>
                                         <th>Nome da Região</th>
-                                       
+
                                     </tr>
                                 </thead>
                                 <?php foreach ($regioes as $regiao): ?>
                                     <tr>
-                                        <td data-label = "Codigo da Região">
+                                        <td data-label="Codigo da Região">
                                             <?= $regiao['CodigoRegiao']; ?>
                                         </td>
-                                        <td data-label = "Nome da Região">
+                                        <td data-label="Nome da Região">
                                             <?= $regiao['NomeRegiao']; ?>
                                         </td>
 
@@ -191,8 +215,37 @@
             </div>
         </div>
     </div>
-    </div>
 
+
+    <script>
+    // Função JavaScript para confirmar a exclusão e enviar o formulário
+    function excluirPonto(codigoPonto) {
+        if (confirm('Tem certeza de que deseja excluir este ponto estratégico?')) {
+            var form = document.createElement('form');
+            form.method = 'post';
+            form.action = ' '; // Coloque a URL apropriada aqui
+
+            var deleteInput = document.createElement('input');
+            deleteInput.type = 'hidden';
+            deleteInput.name = 'deletePonto';
+            deleteInput.value = 'true';
+            form.appendChild(deleteInput);
+
+            var codigoPontoInput = document.createElement('input');
+            codigoPontoInput.type = 'hidden';
+            codigoPontoInput.name = 'codigoPonto';
+            codigoPontoInput.value = codigoPonto;
+            form.appendChild(codigoPontoInput);
+
+            document.body.appendChild(form);
+
+            // Oculta o preloader antes de enviar o formulário
+            document.getElementById('preloader').style.display = 'none';
+
+            form.submit();
+        }
+    }
+</script>
 
     <!-- jQuery -->
     <script src="assets/js/jquery-2.1.0.min.js"></script>

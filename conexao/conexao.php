@@ -24,7 +24,7 @@
             if (!isset(self::$instancia)) {
                 try {
                     self::$instancia = new Conexao();
-                    echo 'Conectado com sucesso !!!!';
+                    echo ' ';
                 } catch (Exception $e) {
                     echo 'Erro ao conectar';
                     exit();

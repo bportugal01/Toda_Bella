@@ -8,7 +8,10 @@
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap"
         rel="stylesheet">
 
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://getbootstrap.com/docs/5.2/assets/css/docs.css" rel="stylesheet">
+    <title>Bootstrap Example</title>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 
 
     <!-- Additional CSS Files -->
@@ -22,12 +25,7 @@
 
     <link rel="stylesheet" href="assets/css/lightbox.css">
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-animate.js"></script>
-    <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-1.2.5.js"></script>
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
 
 
 
@@ -39,17 +37,55 @@
         }
 
 
+        /* Altere a cor do foco do botão no accordion */
+        .accordion-button:focus {
+            box-shadow: 0 0 0 0.25rem #c62152;
+            /* Substitua pelo código de cor desejado */
+        }
+
+        /* Altere a transição do accordion */
+
+        .accordion-item {
+            background-color: #fff;
+
+        }
+
+        .accordion-item .accordion-button:not(.collapsed) {
+            --bs-accordion-active-bg: #f25180;
+            /* Substitua pela cor desejada */
+            color: #fff;
+            /* Cor do texto no cabeçalho quando ativo */
+        }
+
+       
+
+        .accordion-button:not(.collapsed) {
+            color: #c62152;
+            /* Substitua pelo código de cor desejado */
+        }
+
+        .accordion-button {
+            color: #fff;
+            /* Substitua pelo código de cor desejado */
+        }
+
+        .accordion-button {
+            background-color: #f25180;
+            /* Substitua pelo código de cor desejado */
+        }
 
         .logo img {
-            max-height: 95px;
+            max-height: 80px;
             /* Ajuste a altura máxima conforme necessário */
             max-width: 100%;
             /* Garante que o logo não ultrapasse o contêiner */
             margin-right: 10px;
             /* Espaçamento entre o logo e o texto (se houver) */
-         
+
         }
     </style>
+
+
 
 </head>
 
@@ -118,37 +154,192 @@
         </div>
     </header>
     <br>
+
+
     <div class="subscribe">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="border p-4">
                     <div class="section-heading">
-
-                        <a href="select_Ponto_Regiao.php">A – Listar todos os pontos estratégicos de cada
-                            região.</a><br>
-                        <a href="select_Regiao.php">B – Listar os nomes das regiões cadastradas.</a><br>
-                        <a href="select_VendedorVeiculo.php">C – Listar todos os vendedores e quais veículos que eles
-                            utilizaram no
-                            último mês.</a><br>
-                        <a href="select_VendedorRegiao.php">D – Listar todos os vendedores responsáveis por cada
-                            região.</a><br>
-                        <a href="select_VendedorProduto.php">E - Todos os produtos vendidos por um determinado
-                            "vendedor".</a><br>
-                        <a href="select_ProdutoVendedor.php">F - Todos os vendedores que venderam um determinado
-                            <produto>.
-                        </a><br>
-                        <a href="select_ProdutosN.php">G – Todos os produtos que ainda não foram vendidos.</a><br>
-                        <a href="select_HistoricoVeiculo.php">H - Listar o histórico de utilização de um determinado
-                            <veículo>.
-                        </a><br>
-                        <a href="select_QuantidadeProdutoNotaF.php">I - A quantidade de itens de cada nota
-                            fiscal.</a><br>
+                        <div class="accordion" id="accordionExample">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingOne">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                        A – Pontos Estratégicos por Região:<span class="bi" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"></span>
+                                    </button>
+                                </h2>
+                                <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
+                                    data-bs-parent="#accordionExample" style="">
+                                    <div class="accordion-body">
+                                        Este relatório apresenta uma lista completa de todos os pontos estratégicos em
+                                        cada região. Esses pontos podem incluir áreas de grande circulação, locais de
+                                        interesse comercial ou quaisquer outras localidades relevantes para a estratégia
+                                        de negócios.
+                                        <a href="select_Ponto_Regiao.php">Visualize</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingTwo">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                        B – Nomes das Regiões Cadastradas:
+                                    </button>
+                                </h2>
+                                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                                    data-bs-parent="#accordionExample">
+                                    <div class="accordion-body">
+                                        Neste documento, estão discriminados os nomes de todas as regiões que foram
+                                        cadastradas no sistema. Isso proporciona uma visão geral das áreas geográficas
+                                        abrangidas pelo sistema de gestão, facilitando a organização e a referência.
+                                        <a href="select_Regiao.php">Visualize</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingThree">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseThree" aria-expanded="false"
+                                        aria-controls="collapseThree">
+                                        C – Vendedores e Veículos do Último Mês:
+                                    </button>
+                                </h2>
+                                <div id="collapseThree" class="accordion-collapse collapse"
+                                    aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                                    <div class="accordion-body">
+                                        Esse relatório detalha todos os vendedores ativos e os veículos que utilizaram
+                                        no último mês. Essa informação é valiosa para avaliar a mobilidade dos
+                                        vendedores e entender as preferências de veículos associadas ao desempenho de
+                                        vendas.
+                                        <a href="select_VendedorVeiculo.php">Visualize</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingFour">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseFour" aria-expanded="false"
+                                        aria-controls="collapseFour">
+                                        D – Vendedores por Região:
+                                    </button>
+                                </h2>
+                                <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour"
+                                    data-bs-parent="#accordionExample">
+                                    <div class="accordion-body">
+                                        Este relatório apresenta uma lista completa de todos os vendedores ativos
+                                        em cada região. Essa informação é valiosa para avaliar a mobilidade dos
+                                        vendedores e entender as preferências de veículos associadas ao desempenho
+                                        de vendas.
+                                        <a href="select_VendedorRegiao.php">Visualize</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingFive">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseFive" aria-expanded="false"
+                                        aria-controls="collapseFive">
+                                        E – Produtos Vendidos por Vendedor:
+                                    </button>
+                                </h2>
+                                <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive"
+                                    data-bs-parent="#accordionExample">
+                                    <div class="accordion-body">
+                                        Este relatório apresenta uma lista completa de todos os produtos
+                                        vendidos por um determinado vendedor. Essa informação é valiosa para
+                                        avaliar o desempenho de vendas de cada vendedor e entender as
+                                        preferências de produtos associadas ao desempenho de vendas.
+                                        <a href="select_VendedorProduto.php">Visualize</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingSix">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                                        F – Vendedores por Produto:
+                                    </button>
+                                </h2>
+                                <div id="collapseSix" class="accordion-collapse collapse" aria-labelledby="headingSix"
+                                    data-bs-parent="#accordionExample">
+                                    <div class="accordion-body">
+                                        Este relatório apresenta uma lista completa de todos os vendedores
+                                        que venderam um determinado produto. Essa informação é valiosa para
+                                        avaliar o desempenho de vendas de cada vendedor e entender as
+                                        preferências de produtos associadas ao desempenho de vendas.
+                                        <a href="select_ProdutoVendedor.php">Visualize</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingSeven">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseSeven" aria-expanded="false"
+                                        aria-controls="collapseSeven">
+                                        G – Produtos Não Vendidos:
+                                    </button>
+                                </h2>
+                                <div id="collapseSeven" class="accordion-collapse collapse"
+                                    aria-labelledby="headingSeven" data-bs-parent="#accordionExample">
+                                    <div class="accordion-body">
+                                        Este relatório apresenta uma lista completa de todos os produtos
+                                        que ainda não foram vendidos. Essa informação é valiosa para
+                                        avaliar o desempenho de vendas de cada produto e entender as
+                                        preferências de produtos associadas ao desempenho de vendas.
+                                        <a href="select_ProdutosN.php">Visualize</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingEight">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseEight" aria-expanded="false"
+                                        aria-controls="collapseEight">
+                                        H – Histórico de Utilização de Veículo:
+                                    </button>
+                                </h2>
+                                <div id="collapseEight" class="accordion-collapse collapse"
+                                    aria-labelledby="headingEight" data-bs-parent="#accordionExample">
+                                    <div class="accordion-body">
+                                        Este relatório apresenta uma lista completa de todos os veículos
+                                        utilizados por um determinado vendedor. Essa informação é valiosa
+                                        para avaliar o desempenho de vendas de cada vendedor e entender as
+                                        preferências de veículos associadas ao desempenho de vendas.
+                                        <a href="select_HistoricoVeiculo.php">Visualize</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingNine">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseNine" aria-expanded="false"
+                                        aria-controls="collapseNine">
+                                        I – Quantidade de Itens de Cada Nota Fiscal:
+                                    </button>
+                                </h2>
+                                <div id="collapseNine" class="accordion-collapse collapse" aria-labelledby="headingNine"
+                                    data-bs-parent="#accordionExample">
+                                    <div class="accordion-body">
+                                        Este relatório apresenta uma lista completa de todos os itens de
+                                        cada nota fiscal. Essa informação é valiosa para avaliar o
+                                        desempenho de vendas de cada produto e entender as preferências
+                                        de produtos associadas ao desempenho de vendas.
+                                        <a href="select_QuantidadeProdutoNotaF.php">Visualize</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    
+
+
+
+
+
     <!-- jQuery -->
     <script src="assets/js/jquery-2.1.0.min.js"></script>
 

@@ -37,7 +37,7 @@
             /* Garante que o logo não ultrapasse o contêiner */
             margin-right: 10px;
             /* Espaçamento entre o logo e o texto (se houver) */
-         
+
         }
     </style>
 </head>
@@ -110,25 +110,43 @@
                     <div class="section-heading">
                         <h2>Cadastro de Vendedor</h2>
                         <form action="" method="post">
-                            <label for="nomeVendedor">Nome do Vendedor:</label>
-                            <input type="text" id="nomeVendedor" name="nomeVendedor" required>
+                            <div class="mb-3">
+                                <fieldset>
+                                    <label for="nomeVendedor">Nome do Vendedor:</label>
+                                    <input type="text" id="nomeVendedor" name="nomeVendedor" required>
+                                </fieldset>
+                            </div>
 
-                            <label for="rgVendedor">RG do Vendedor:</label>
-                            <input type="text" id="rgVendedor" name="rgVendedor" required>
-
-                            <label for="dataNascimento">Data de Nascimento:</label>
-                            <input type="date" id="dataNascimento" name="dataNascimento" required>
-
-                            <label for="telefoneVendedor">Telefone do Vendedor:</label>
-                            <input type="tel" id="telefoneVendedor" name="telefoneVendedor" required>
-
-                            <label for="codigoRegiao">Código da Região:</label>
-                            <!-- Aqui, você pode carregar dinamicamente as opções de região do banco de dados -->
-                            <input type="number" id="codigoRegiao" name="codigoRegiao" required>
-
+                            <div class="mb-3">
+                                <fieldset>
+                                    <label for="rgVendedor">RG do Vendedor:</label>
+                                    <input type="text" id="rgVendedor" name="rgVendedor"
+                                        value="<?php echo isset($_POST['rgVendedor']) ? $_POST['rgVendedor'] : ''; ?>"
+                                        oninput="formatRG()" maxlength="12" required>
+                                </fieldset>
+                            </div>
+                            <div class="mb-3">
+                                <fieldset>
+                                    <label for="dataNascimento">Data de Nascimento:</label>
+                                    <input type="date" id="dataNascimento" name="dataNascimento" required>
+                                </fieldset>
+                            </div>
+                            <div class="mb-3">
+                                <fieldset>
+                                    <label for="telefoneVendedor">Telefone do Vendedor:</label>
+                                    <input type="tel" id="telefoneVendedor" name="telefoneVendedor" oninput="formatCelular()" required>
+                                </fieldset>
+                            </div>
+                            <div class="mb-3">
+                                <fieldset>
+                                    <label for="codigoRegiao">Código da Região:</label>
+                                    <!-- Aqui, você pode carregar dinamicamente as opções de região do banco de dados -->
+                                    <input type="number" id="codigoRegiao" name="codigoRegiao" required>
+                                </fieldset>
+                            </div>
                             <button type="submit">Cadastrar Vendedor</button>
                         </form>
-                      
+
                         <?php
                         include_once 'DAO/VendedorDAO.php';
 
@@ -148,6 +166,7 @@
             </div>
         </div>
     </div>
+    <br>
     <!-- jQuery -->
     <script src="assets/js/jquery-2.1.0.min.js"></script>
 
@@ -185,6 +204,24 @@
 
             });
         });
+        function formatRG() {
+            var rgInput = document.getElementById('rgVendedor');
+            rgInput.value = rgInput.value.replace(/[^0-9]/g, ''); // Remove caracteres não numéricos
+            rgInput.value = rgInput.value.substring(0, 12); // Limita a 12 caracteres
+            rgInput.value = rgInput.value.replace(/(\d{2})(\d{3})(\d{3})(\d{1})/, '$1.$2.$3-$4');
+        }
+
+
+
+        function formatCelular() {
+            var celularInput = document.getElementById('telefoneVendedor');
+            celularInput.value = celularInput.value.replace(/[^0-9]/g, ''); // Remove caracteres não numéricos
+            celularInput.value = celularInput.value.substring(0, 11); // Limita a 11 caracteres
+            celularInput.value = celularInput.value.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
+        }
+
+
+
 
     </script>
 

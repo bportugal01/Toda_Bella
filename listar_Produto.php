@@ -1,3 +1,25 @@
+<?php
+ob_start();
+include_once 'DAO/ProdutoDAO.php';
+
+$redirectUrl = 'listar_Produto.php';
+
+if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['delete']) && isset($_POST['codigoProduto'])) {
+    $codigoProduto = $_POST['codigoProduto'];
+    $deleted = ProdutoDAO::excluirProduto($codigoProduto);
+
+    if ($deleted) {
+        header("Location: $redirectUrl");
+        exit();
+    } else {
+        $deleteError = "Erro ao excluir o produto.";
+    }
+}
+
+$produtos = ProdutoDAO::listarProdutos();
+ob_end_clean();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -31,8 +53,7 @@
 
 
 
-    <link rel="stylesheet" href="assets/css/table.css">
-
+    <link rel="stylesheet" href="assets/css/css.css">
     <style>
         /* Adicione este código ao seu arquivo de estilo CSS */
         .logo {
@@ -48,7 +69,7 @@
             /* Garante que o logo não ultrapasse o contêiner */
             margin-right: 10px;
             /* Espaçamento entre o logo e o texto (se houver) */
-         
+
         }
     </style>
 
@@ -121,65 +142,83 @@
             <div class="row justify-content-center">
                 <div class="border p-4">
                     <div class="section-heading">
+    
 
-                        <div id="wrapper">
-                            <?php
-                            // Agora, após o possível cadastro, lista os pontos estratégicos
-                            include_once 'DAO/ProdutoDAO.php';
-                            $Produtos = ProdutoDAO::listarProdutos();
-
-                            ?>
-                            <h2>Listagem de Produtos</h2>
-                            <table>
-                                <thead>
+                        <h2>Listagem de Produtos</h2>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Código do Produto</th>
+                                    <th>Nome do Produto</th>
+                                    <th>Situação</th>
+                                    <th>Preço Unitário</th>
+                                    <th>Quantidade em Estoque</th>
+                                    <th>Excluir</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($produtos as $Produto): ?>
                                     <tr>
-                                        <th>Código do Produto</th>
-                                        <th>Nome do Produto</th>
-                                        <th>Situação</th>
-                                        <th>Preço Unitário</th>
-                                        <th>Quantidade em Estoque</th>
-                                        <th>Excluir</th>
+                                        <td data-label="Codigo do Produto">
+                                            <?= $Produto['CodigoProduto'] ?>
+                                        </td>
+                                        <td data-label="Nome do Produto">
+                                            <?= $Produto['NomeProduto'] ?>
+                                        </td>
+                                        <td data-label="Situação do Produto">
+                                            <?= $Produto['SituacaoProduto'] ?>
+                                        </td>
+                                        <td data-label="Preço Unitário">
+                                            <?= $Produto['PrecoUnitario'] ?>
+                                        </td>
+                                        <td data-label="Quantidade em Estoque">
+                                            <?= $Produto['QuantidadeEstoque'] ?>
+                                        </td>
+                                        <td data-label="Ações">
+                                            <!-- Link para acionar a exclusão por meio de JavaScript -->
+                                            <a href="#"class="btn btn-primary " style="background-color: #c62152"
+                                                onclick="excluirProduto(<?= $Produto['CodigoProduto']; ?>)">Excluir</a>
+                                        </td>
                                     </tr>
-                                </thead>
-                                <tbody>
-                                    <?php foreach ($Produtos as $Produto): ?>
-                                        <tr>
-                                            <td data-label = "Codigo do Produto">
-                                                <?= $Produto['CodigoProduto'] ?>
-                                            </td>
-                                            <td data-label="Nome do Produto">
-                                                <?= $Produto['NomeProduto'] ?>
-                                            </td>
-                                            <td data-label="Situação do Produto">
-                                                <?= $Produto['SituacaoProduto'] ?>
-                                            </td>
-                                            <td data-label="Preço Unitário">
-                                                <?= $Produto['PrecoUnitario'] ?>
-                                            </td>
-                                            <td data-label="Quantidade em Estoque">
-                                                <?= $Produto['QuantidadeEstoque'] ?>
-                                            </td>
-                                            <td data-label = "Ações">
-                                                <form action="" method="post">
-                                                    <input type="hidden" name="codigoProduto"
-                                                        value="<?= $Produto['CodigoProduto'] ?>">
-                                                    <button type="submit">Excluir</button>
-                                                </form>
-                                            </td>
-                                        </tr>
-                                    <?php endforeach; ?>
-                                </tbody>
-                            </table>
-                        
-                        </div>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    </div>
 
+    <script>
+        // Função JavaScript para confirmar a exclusão e enviar o formulário
+        function excluirProduto(codigoProduto) {
+            if (confirm('Tem certeza de que deseja excluir este produto?')) {
+                var form = document.createElement('form');
+                form.method = 'post';
+                form.action = ''; // Coloque a URL apropriada aqui
 
+                var deleteInput = document.createElement('input');
+                deleteInput.type = 'hidden';
+                deleteInput.name = 'delete';
+                deleteInput.value = 'true';
+                form.appendChild(deleteInput);
+
+                var codigoProdutoInput = document.createElement('input');
+                codigoProdutoInput.type = 'hidden';
+                codigoProdutoInput.name = 'codigoProduto';
+                codigoProdutoInput.value = codigoProduto;
+                form.appendChild(codigoProdutoInput);
+
+                document.body.appendChild(form);
+
+               
+
+                form.submit();
+            }
+        }
+
+      
+    </script>
     <!-- jQuery -->
     <script src="assets/js/jquery-2.1.0.min.js"></script>
 

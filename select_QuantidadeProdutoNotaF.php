@@ -31,7 +31,7 @@
 
 
 
-    <link rel="stylesheet" href="assets/css/table.css">
+    <link rel="stylesheet" href="assets/css/css.css">
 
     <style>
         /* Adicione este código ao seu arquivo de estilo CSS */
@@ -149,7 +149,7 @@
                                 <?php endforeach; ?>
                             </tbody>
                             </table>
-                        <a href="select.php">voltar</a>
+                            <a href="select.php" class="btn btn-primary " style="background-color: #c62152" href="select.php">voltar</a>
                     </div>
                 </div>
             </div>

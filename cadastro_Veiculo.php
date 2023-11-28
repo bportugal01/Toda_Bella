@@ -38,7 +38,7 @@
             /* Garante que o logo não ultrapasse o contêiner */
             margin-right: 10px;
             /* Espaçamento entre o logo e o texto (se houver) */
-         
+
         }
     </style>
 </head>
@@ -112,17 +112,30 @@
                     <div class="section-heading">
                         <h2>Cadastro de Veiculo</h2>
                         <form action="" method="post">
-                            <label for="codigoVeiculo">Código do Veiculo:</label>
-                            <input type="text" id="codigoVeiculo" name="codigoVeiculo" required>
-
-                            <label for="placaVeiculo">Placa do Veiculo:</label>
-                            <input type="text" id="placaVeiculo" name="placaVeiculo" required>
-
-                            <label for="tipoVeiculo">Tipo do Veiculo:</label>
-                            <input type="text" id="tipoVeiculo" name="tipoVeiculo" required>
-
-                            <label for="modeloVeiculo">Modelo do Veiculo:</label>
-                            <input type="text" id="modeloVeiculo" name="modeloVeiculo" required>
+                            <div class="mb-3">
+                                <fieldset>
+                                    <label for="codigoVeiculo">Código do Veiculo:</label>
+                                    <input type="text" id="codigoVeiculo" name="codigoVeiculo" required>
+                                </fieldset>
+                            </div>
+                            <div class="mb-3">
+                                <fieldset>
+                                    <label for="placaVeiculo">Placa do Veiculo:</label>
+                                    <input type="text" id="placaVeiculo" name="placaVeiculo" required>
+                                </fieldset>
+                            </div>
+                            <div class="mb-3">
+                                <fieldset>
+                                    <label for="tipoVeiculo">Tipo do Veiculo:</label>
+                                    <input type="text" id="tipoVeiculo" name="tipoVeiculo" required>
+                                </fieldset>
+                            </div>
+                            <div class="mb-3">
+                                <fieldset>
+                                    <label for="modeloVeiculo">Modelo do Veiculo:</label>
+                                    <input type="text" id="modeloVeiculo" name="modeloVeiculo" required>
+                                </fieldset>
+                            </div>
 
                             <button type="submit">Cadastrar Veiculo</button>
                         </form>
